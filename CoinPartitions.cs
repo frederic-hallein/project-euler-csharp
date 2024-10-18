@@ -45,6 +45,7 @@
             int n = 0;
             double p_n = 0;
 
+            // TODO : use Pentagonal number theorem to speed up calculations
             bool leastValueIsFound = false;
             while (!leastValueIsFound) {
                 if (n == 0) { p_n++; }
