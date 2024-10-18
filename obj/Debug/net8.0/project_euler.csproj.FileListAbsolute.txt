@@ -12,3 +12,4 @@
 /home/fhallein/dev/beach/project_euler/obj/Debug/net8.0/project_euler.pdb
 /home/fhallein/dev/beach/project_euler/obj/Debug/net8.0/project_euler.genruntimeconfig.cache
 /home/fhallein/dev/beach/project_euler/obj/Debug/net8.0/ref/project_euler.dll
+/home/fhallein/dev/beach/project_euler/obj/Debug/net8.0/project_euler.sourcelink.json
