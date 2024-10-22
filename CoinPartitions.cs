@@ -21,12 +21,12 @@
 
     class CoinPartitions
     {
-        static readonly Dictionary<int, BigInteger> pValues = [];
+        static readonly Dictionary<int, BigInteger> pDict = [];
 
         // calculates the partition function p(n) using the recurrence relations from https://en.wikipedia.org/wiki/Partition_function_(number_theory).
         static BigInteger P(int n)
         {
-            if (pValues.TryGetValue(n, out BigInteger pValue)) { return pValue; }
+            if (pDict.TryGetValue(n, out BigInteger pValue)) { return pValue; }
             else if (n == 0) { return 1; }
             else if (n < 0)  { return 0; }
             
@@ -41,13 +41,13 @@
                 }
             }
 
-            pValues.Add(n, p);
+            pDict.Add(n, p);
             return p;   
         }
         
 
 
-        static void Main(string[] args)
+        static void Main()
         {           
             int n = 0;
             BigInteger p;
