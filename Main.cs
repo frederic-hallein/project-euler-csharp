@@ -30,6 +30,7 @@ namespace project_euler
                     
                 case 2:
  
+                    // TODO : optimize using Yun's algorithm (ROADBLOCK: what is the relation between positive integers and polynomials ???)
                     n = 500;
 
                     int C = 0;
