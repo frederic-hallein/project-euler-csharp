@@ -28,9 +28,10 @@ namespace project_euler
 
         static int Omega(int n) { return distinctPrimes.Count; }
 
+        // check whether n is square-free or not using the algorithm from https://www.geeksforgeeks.org/square-free-number/  
+        // and add distinct primes to a list
         static bool IsSquareFree(int n)
         {
-            //List<int> distinctPrimes = [];
             if (n % 2 == 0) { distinctPrimes.Add(2); n /= 2; }
             if (n % 2 == 0) { distinctPrimes.Clear(); return false; }
             int i = 3;
@@ -53,6 +54,9 @@ namespace project_euler
             if (!IsSquareFree(n)) { return 0; }
             return (int)Math.Pow(-1, Omega(n));
         }
+
+
+
 
 
     }
