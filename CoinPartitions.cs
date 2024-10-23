@@ -19,12 +19,12 @@
     
     using System.Numerics;
 
-    class CoinPartitions
+    public class CoinPartitions
     {
         static readonly Dictionary<int, BigInteger> pDict = [];
 
         // calculates the partition function p(n) using the recurrence relations from https://en.wikipedia.org/wiki/Partition_function_(number_theory).
-        static BigInteger P(int n)
+        public static BigInteger P(int n)
         {
             if (pDict.TryGetValue(n, out BigInteger pValue)) { return pValue; }
             else if (n == 0) { return 1; }
@@ -45,26 +45,5 @@
             return p;   
         }
         
-
-
-        static void Main()
-        {           
-            int n = 0;
-            BigInteger p;
-            int divisor = 1000000;
-
-            bool leastValueIsFound = false;
-            while (!leastValueIsFound) {
-                p = P(n); 
-                Console.WriteLine($"p({n}) = {p}");
-                if (p % divisor == 0) { 
-                    leastValueIsFound = true; 
-                    Console.WriteLine($"\nThe least value of n for which p(n) is divisible by {divisor} is n = {n}."); 
-                }
-                else { n++; }
-                
-            }
-            
-        }
     }
 }
