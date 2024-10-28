@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace project_euler 
 {
     /*
@@ -24,39 +26,63 @@ namespace project_euler
 
     public class MobiusFunctionAndIntervals
     {
-        public static readonly List<int> distinctPrimes = [];
+        //public static readonly List<int> distinctPrimes = [];
 
         
         // check whether n is square-free or not using the algorithm from https://www.geeksforgeeks.org/square-free-number/  
         // and add distinct primes to a list
-        static bool IsSquareFree(int n)
+        static BigInteger Omega(int n) 
         {
+            List<int> distinctPrimes = [];
             if (n % 2 == 0) { distinctPrimes.Add(2); n /= 2; }
-            if (n % 2 == 0) { distinctPrimes.Clear(); return false; }
+            if (n % 2 == 0) { distinctPrimes.Clear(); return -1; }
             int i = 3;
             while (i <= Math.Sqrt(n)) {
                 if (n % i == 0) {  
                     distinctPrimes.Add(i);       
                     n /= i;
-                    if (n % i == 0) { distinctPrimes.Clear(); return false; }
+                    if (n % i == 0) { distinctPrimes.Clear(); return -1; }
                 }   
                 i += 2;
             }
             
             if (n > 1) { distinctPrimes.Add(n); }
-            return true;
+            return distinctPrimes.Count;
+        }
+
+
+        static int Mu(int n)
+        {
+            BigInteger omega = Omega(n);
+            if (omega >= 0) { return (int)Math.Pow(-1, (double)omega); }
+            return 0;
         }
         
 
-
         
-        public static int Mu(int n)
-        {
-            if (IsSquareFree(n)) { 
-                int omega = distinctPrimes.Count;
-                return (int)Math.Pow(-1, omega); 
+        public static BigInteger C(int n) {
+            Dictionary<int, int> muDict = [];
+            BigInteger C = 0;
+            for (int b = 1; b <= n; b++) {
+                int mu = Mu(b);
+                muDict.Add(b, mu);
+                Console.WriteLine($"n = {b}");
+
+                int P = 0;
+                int N = 0;
+                for (int a = b; a >= 1; a--) {
+
+                    if      (muDict[a] ==  1) { P++; }
+                    else if (muDict[a] == -1) { N++; }
+
+                    
+                    if (99 * N <= 100 * P && 99 * P <= 100 * N) { C++; }
+                }
+                
             }
-            return 0;
+
+            return C;
+
         }
 
 
