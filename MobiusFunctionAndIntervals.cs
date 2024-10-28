@@ -26,8 +26,7 @@ namespace project_euler
     {
         public static readonly List<int> distinctPrimes = [];
 
-        static int Omega(int n) { return distinctPrimes.Count; }
-
+        
         // check whether n is square-free or not using the algorithm from https://www.geeksforgeeks.org/square-free-number/  
         // and add distinct primes to a list
         static bool IsSquareFree(int n)
@@ -44,18 +43,21 @@ namespace project_euler
                 i += 2;
             }
             
-            if (n != 1) { distinctPrimes.Add(n); }
+            if (n > 1) { distinctPrimes.Add(n); }
             return true;
         }
+        
+
 
         
         public static int Mu(int n)
         {
-            if (!IsSquareFree(n)) { return 0; }
-            return (int)Math.Pow(-1, Omega(n));
+            if (IsSquareFree(n)) { 
+                int omega = distinctPrimes.Count;
+                return (int)Math.Pow(-1, omega); 
+            }
+            return 0;
         }
-
-
 
 
 
