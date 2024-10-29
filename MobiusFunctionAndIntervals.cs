@@ -1,4 +1,6 @@
 using System.Numerics;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace project_euler 
 {
@@ -30,7 +32,6 @@ namespace project_euler
 
         
         // check whether n is square-free or not using the algorithm from https://www.geeksforgeeks.org/square-free-number/  
-        // and add distinct primes to a list
         static BigInteger Omega(int n) 
         {
             List<int> distinctPrimes = [];
@@ -58,32 +59,45 @@ namespace project_euler
             return 0;
         }
         
-
         
         public static BigInteger C(int n) {
             Dictionary<int, int> muDict = [];
             BigInteger C = 0;
+            BigInteger CPrev = 0;
+            int cnt = 1; //
             for (int b = 1; b <= n; b++) {
+                BigInteger CTmp = 0;
                 int mu = Mu(b);
                 muDict.Add(b, mu);
                 Console.WriteLine($"n = {b}");
+                
+                if (mu == 0) { C += CPrev + cnt; cnt++; }
+                else {
+                    cnt = 1;
+                    int P = 0;
+                    int N = 0;
+                    for (int a = b; a >= 1; a--) {
 
-                int P = 0;
-                int N = 0;
-                for (int a = b; a >= 1; a--) {
+                        if      (muDict[a] ==  1) { P++; }
+                        else if (muDict[a] == -1) { N++; }
+                        //Console.WriteLine($"P({a},{b}) = {P}, N({a},{b}) = {N}");
+                        if (99 * N <= 100 * P && 99 * P <= 100 * N) { CTmp++; }
+                    }
 
-                    if      (muDict[a] ==  1) { P++; }
-                    else if (muDict[a] == -1) { N++; }
+                    CPrev = CTmp;
+                    C += CPrev;
 
-                    
-                    if (99 * N <= 100 * P && 99 * P <= 100 * N) { C++; }
                 }
+                
+
                 
             }
 
             return C;
 
         }
+        
+
 
 
 

@@ -32,7 +32,7 @@ namespace project_euler
                     
                 case 2:
  
-                    n = 10_000;  
+                    n = 1_000_000;  
                     BigInteger C = MobiusFunctionAndIntervals.C(n);
                     Console.WriteLine($"\nWe find C({n}) = {C}");
                     break; 
