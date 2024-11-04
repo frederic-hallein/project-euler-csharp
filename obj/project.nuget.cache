@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qTHIiDT3GUirrLEo/qMWun+XkPd9jivx7iWXaV24NLuFUNnFj0A65PmAyZt51zuIqZ3qkLHJsR6gg2vWUx7biQ==",
+  "dgSpecHash": "evfxEp+4QTYBNxndTAkUVsJSF4V4JGJNcHEyiElXQMlK6LWov+o2gr+Hz/YsDptLxcR/4m/Xn80QosxubACeCA==",
   "success": true,
-  "projectFilePath": "/home/fhallein/dev/beach/project_euler/project_euler.csproj",
+  "projectFilePath": "/home/fhallein/dev/beach/project-euler-csharp/project_euler.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

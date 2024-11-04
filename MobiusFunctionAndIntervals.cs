@@ -1,6 +1,7 @@
 using System.Numerics;
-using System.Reflection;
-using System.Runtime.InteropServices;
+using System.Text.Json;
+
+
 
 namespace project_euler 
 {
@@ -28,17 +29,42 @@ namespace project_euler
 
     public class MobiusFunctionAndIntervals
     {
-        //public static readonly List<int> distinctPrimes = [];
+        // TODO : try again saving primes to file
 
+
+
+
+        static readonly Dictionary<int, bool> isPrimeDict = [];
+
+        public static void SieveOfEratosthenes(int n) 
+        {
+            bool[] isPrime = new bool[n + 1];
+            for (int i = 2; i <= n; i++) { isPrime[i] = true; }
+
+            for (int p = 2; p * p <= n; p++) {
+                if (isPrime[p]) {
+                    for (int i = p * p; i <= n; i += p) { isPrime[i] = false; }
+                }
+            }
+
+            for (int i = 0; i <= n; i++) {
+                isPrimeDict.Add(i, isPrime[i]);
+                Console.WriteLine($"{i} : {isPrimeDict[i]}");
+            }
+
+
+        }
         
         // check whether n is square-free or not using the algorithm from https://www.geeksforgeeks.org/square-free-number/  
         static BigInteger Omega(int n) 
         {
+            if (isPrimeDict[n]) { return 1; }
+
             List<int> distinctPrimes = [];
             if (n % 2 == 0) { distinctPrimes.Add(2); n /= 2; }
             if (n % 2 == 0) { distinctPrimes.Clear(); return -1; }
             int i = 3;
-            while (i <= Math.Sqrt(n)) {
+            while (i * i <= n) {
                 if (n % i == 0) {  
                     distinctPrimes.Add(i);       
                     n /= i;
@@ -50,7 +76,7 @@ namespace project_euler
             if (n > 1) { distinctPrimes.Add(n); }
             return distinctPrimes.Count;
         }
-
+        
 
         static int Mu(int n)
         {
@@ -64,7 +90,7 @@ namespace project_euler
             Dictionary<int, int> muDict = [];
             BigInteger C = 0;
             BigInteger CPrev = 0;
-            int cnt = 1; //
+            int cnt = 1; 
             for (int b = 1; b <= n; b++) {
                 BigInteger CTmp = 0;
                 int mu = Mu(b);

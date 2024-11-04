@@ -10,9 +10,9 @@ namespace project_euler
             var watch = new System.Diagnostics.Stopwatch();
             watch.Start();
             
-            int problem = 2;
+            int problem = 464;
             switch(problem) {
-                case 1:
+                case 78:
                     n = 0;
                     BigInteger p;
                     int divisor = 1_000_000;
@@ -30,9 +30,10 @@ namespace project_euler
                     }
                     break;
                     
-                case 2:
+                case 464:
  
-                    n = 1_000_000;  
+                    n = 10_000;  
+                    MobiusFunctionAndIntervals.SieveOfEratosthenes(n);
                     BigInteger C = MobiusFunctionAndIntervals.C(n);
                     Console.WriteLine($"\nWe find C({n}) = {C}");
                     break; 

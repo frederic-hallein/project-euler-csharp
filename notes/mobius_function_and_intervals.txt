@@ -98,3 +98,7 @@ We find C(10) = 13
 
 We find C(1000000) = 463051896019
 Execution Time: 8316593 ms
+
+
+We find C(100000) = 3732887700
+Execution Time: 74123 ms
