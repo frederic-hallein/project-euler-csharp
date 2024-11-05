@@ -10,7 +10,7 @@ namespace project_euler
             var watch = new System.Diagnostics.Stopwatch();
             watch.Start();
             
-            int problem = 464;
+            int problem = 653;
             switch(problem) {
                 case 78:
                     n = 0;
@@ -37,6 +37,16 @@ namespace project_euler
                     BigInteger C = MobiusFunctionAndIntervals.C(n);
                     Console.WriteLine($"\nWe find C({n}) = {C}");
                     break; 
+
+                case 653:
+
+                    uint L = 5000;
+                    uint N = 3;
+                    uint j = 2;
+                    BigInteger D = FrictionLessTube.D(L, N, j);
+                    Console.WriteLine($"\nWe find d({L}, {N}, {j}) = {D}.");
+                    break;
+
 
                 default:
                     break;
