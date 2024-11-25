@@ -1,5 +1,6 @@
 using System.Numerics;
 
+
 namespace project_euler 
 {
     public class MainClass 
@@ -10,7 +11,7 @@ namespace project_euler
             var watch = new System.Diagnostics.Stopwatch();
             watch.Start();
             
-            int problem = 653;
+            int problem = 464;
             switch(problem) {
                 case 78:
                     n = 0;
@@ -33,7 +34,8 @@ namespace project_euler
                 case 464:
  
                     n = 10_000;  
-                    MobiusFunctionAndIntervals.SieveOfEratosthenes(n);
+                    string filePath = $"data/primes-up-to-{n}.json";
+                    if (!File.Exists(filePath)) { MobiusFunctionAndIntervals.SieveOfEratosthenes(n); }
                     BigInteger C = MobiusFunctionAndIntervals.C(n);
                     Console.WriteLine($"\nWe find C({n}) = {C}");
                     break; 

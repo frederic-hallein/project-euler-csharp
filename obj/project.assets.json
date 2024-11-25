@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/fhallein/dev/beach/project-euler-csharp/project_euler.csproj",
+      "projectUniqueName": "/home/fhallein/axxes/beach/dev/project-euler-csharp/project_euler.csproj",
       "projectName": "project_euler",
-      "projectPath": "/home/fhallein/dev/beach/project-euler-csharp/project_euler.csproj",
+      "projectPath": "/home/fhallein/axxes/beach/dev/project-euler-csharp/project_euler.csproj",
       "packagesPath": "/home/fhallein/.nuget/packages/",
-      "outputPath": "/home/fhallein/dev/beach/project-euler-csharp/obj/",
+      "outputPath": "/home/fhallein/axxes/beach/dev/project-euler-csharp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/fhallein/.nuget/NuGet/NuGet.Config"
