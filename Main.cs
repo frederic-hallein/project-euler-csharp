@@ -32,7 +32,7 @@ namespace project_euler
                     
                 case 464:
  
-                    n = 10_000;  
+                    n = 20_000_000;  
                     MobiusFunctionAndIntervals.SieveOfEratosthenes(n);
                     BigInteger C = MobiusFunctionAndIntervals.C(n);
                     Console.WriteLine($"\nWe find C({n}) = {C}");
