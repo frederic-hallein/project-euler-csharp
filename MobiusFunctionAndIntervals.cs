@@ -1,7 +1,4 @@
 using System.Numerics;
-using System.Text.Json;
-
-
 
 namespace project_euler 
 {
@@ -30,7 +27,8 @@ namespace project_euler
     public class MobiusFunctionAndIntervals
     {
         static readonly Dictionary<int, bool> isPrimeDict = [];
-        static Dictionary<int, bool> isPrimeDictFile = [];
+
+        // use Sieve of Eratosthenes algorithm to determine if integer is prime or not
         public static void SieveOfEratosthenes(int n) 
         {
             bool[] isPrime = new bool[n + 1];
@@ -42,45 +40,13 @@ namespace project_euler
                 }
             }
 
-            for (int i = 0; i <= n; i++) {
-                isPrimeDict.Add(i, isPrime[i]);
-                //Console.WriteLine($"{i}:{isPrime[i]}");
-            }
-
-            string filePath = $"data/primes-up-to-{n}.json";
-            string json = JsonSerializer.Serialize(isPrimeDict);
-            File.WriteAllText(filePath, json); 
-        }
-
-        static int GCD(int a, int b)
-        {
-            // Everything divides 0
-            if (a == 0 || b == 0)
-                return 0;
-
-            // base case
-            if (a == b)
-                return a;
-
-            // a is greater
-            if (a > b)
-                return GCD(a - b, b);
-
-            return GCD(a, b - a);
-        }
-
-        // function to check and print if
-        // two numbers are co-prime or not
-        static bool AreCoprime(int a, int b) {
-            if (GCD(a, b) == 1) { return true; }
-            return false;
+            for (int i = 0; i <= n; i++) { isPrimeDict.Add(i, isPrime[i]); }
         }
         
         // check whether n is square-free or not using the algorithm from https://www.geeksforgeeks.org/square-free-number/  
         static BigInteger Omega(int n) 
         {
-            //if (isPrimeDict[n]) { return 1; }
-            if (isPrimeDictFile[n]) { return 1; }
+            if (isPrimeDict[n]) { return 1; }
        
             List<int> distinctPrimes = [];
             if (n % 2 == 0) { distinctPrimes.Add(2); n /= 2; }
@@ -106,74 +72,37 @@ namespace project_euler
             if (omega >= 0) { return (int)Math.Pow(-1, (double)omega); }
             return 0;
         }
+
         
-        
-        public static BigInteger C(int n) {
-            string jsonFilePath = $"data/primes-up-to-{n}.json";
-            string jsonString = File.ReadAllText(jsonFilePath);
-            isPrimeDictFile = JsonSerializer.Deserialize<Dictionary<int, bool>>(jsonString);
-            
+        public static BigInteger C(int n) 
+        {
             Dictionary<int, int> muDict = [];
+            int mu;
+
             BigInteger C = 0;
             BigInteger CPrev = 0;
             int cnt = 1; 
-            
-            int mu;
             for (int b = 1; b <= n; b++) {
                 BigInteger CTmp = 0;
 
-                // mu = Mu(b);
-                // muDict.Add(b, mu);
+                mu = Mu(b);
+                muDict.Add(b, mu);
                 Console.WriteLine($"n = {b}");
 
-                // use multiplicative rule
-                if (muDict.ContainsKey(b)) { mu = muDict[b]; }
-                else {
-                    mu = Mu(b);
-                    muDict.Add(b, mu);
+                if (mu == 0) { C += CPrev + cnt; cnt++; continue; }
 
-                    int muTmp;
-                    for (int m = 2; m <= b; m++) {
-                        if (m * b > n) { break; }
-                        if (AreCoprime(m, b) && !muDict.ContainsKey(m * b)) {
-                            muTmp = Mu(m * b);
-                            muDict.Add(m * b, muTmp);
-                        } 
-
-                    }
-
+                cnt = 1;
+                int P = 0;
+                int N = 0;
+                for (int a = b; a >= 1; a--) {
+                    if      (muDict[a] ==  1) { P++; }
+                    else if (muDict[a] == -1) { N++; }
+                    if (99 * N <= 100 * P && 99 * P <= 100 * N) { CTmp++; }
                 }
-                    
-                
-                // count mu values in interval
-                if (mu == 0) { C += CPrev + cnt; cnt++; }
-                else {
-                    cnt = 1;
-                    int P = 0;
-                    int N = 0;
-                    for (int a = b; a >= 1; a--) {
-                        if      (muDict[a] ==  1) { P++; }
-                        else if (muDict[a] == -1) { N++; }
-                        //Console.WriteLine($"P({a},{b}) = {P}, N({a},{b}) = {N}");
-                        if (99 * N <= 100 * P && 99 * P <= 100 * N) { CTmp++; }
-                    }
-
-                    CPrev = CTmp;
-                    C += CPrev;
-
-                }
-                
-
-                
+                CPrev = CTmp;
+                C += CPrev;
             }
-
             return C;
-
         }
-        
-
-
-
-
     }
 }

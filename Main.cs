@@ -1,6 +1,5 @@
 using System.Numerics;
 
-
 namespace project_euler 
 {
     public class MainClass 
@@ -34,8 +33,7 @@ namespace project_euler
                 case 464:
  
                     n = 10_000;  
-                    string filePath = $"data/primes-up-to-{n}.json";
-                    if (!File.Exists(filePath)) { MobiusFunctionAndIntervals.SieveOfEratosthenes(n); }
+                    MobiusFunctionAndIntervals.SieveOfEratosthenes(n);
                     BigInteger C = MobiusFunctionAndIntervals.C(n);
                     Console.WriteLine($"\nWe find C({n}) = {C}");
                     break; 
